@@ -1,4 +1,8 @@
-## Step 1: Introduction
+---
+title: "Power Outage Analysis"
+---
+
+## Introduction
 ## Data Cleaning and Exploratory Data Analysis
 ## Framing a Prediction Problem
 ## Baseline Model

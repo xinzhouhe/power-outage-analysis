@@ -1,5 +1,6 @@
 ---
 title: "Power Outage Analysis"
+layout: spec
 ---
 
 ## Introduction

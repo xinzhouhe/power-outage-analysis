@@ -3,6 +3,7 @@ title: "Power Outage Analysis"
 layout: spec
 ---
 
+# Power Outage Analysis
 ## Introduction
 We are given a comprehensive dataset about the power outages that occured in the United States from the year of 2000 and up until the year of 2016, the table below is the detailed description for each column that represents the attributes of the dataset.
 

@@ -11,6 +11,7 @@ kramdown:
 readme_index:
   remove_originals: true
   with_frontmatter: true
+favicon: /static/favicon.png
 
 # Primer-specific settings
 defaults:

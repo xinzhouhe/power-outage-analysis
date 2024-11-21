@@ -2,9 +2,6 @@
 title: "Power Outage Analysis"
 layout: spec
 ---
-<head>
-  {% include head.html %}
-</head>
 
 # Power Outage Analysis
 ## Introduction

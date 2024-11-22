@@ -29,6 +29,6 @@ While there are many columns in the dataset, we aim to primarily focus on the co
 ## Final Model
 
 ## Acknowledgments
-This project report authored by <a href='https://xinzhouhe.github.io/'>Daniel X. He</a> and <a href='https://www.linkedin.com/in/mboze/'>Michael D. Boze</a> as part of <a href='https://practicaldsc.org/'>EECS 398-003 Practical Data Science</a> portfolio homework by <a href='https://rampure.org/'>Professor Suraj Rampure at the University of Michigan College of Engineering</a>.
+This project report authored by <a href='https://xinzhouhe.github.io/'>Daniel X. He</a> and <a href='https://www.linkedin.com/in/mboze/'>Michael D. Boze</a> as part of <a href='https://practicaldsc.org/'>EECS 398-003 Practical Data Science</a> portfolio homework by <a href='https://rampure.org/'>Professor Suraj Rampure</a> at the University of Michigan College of Engineering.
 
 Dataset provided by <a href='https://engineering.purdue.edu/LASCI/research-data/outages'>Laboratory for Advancing Sustainable Critical Infrastructure</a> at Purdue University.

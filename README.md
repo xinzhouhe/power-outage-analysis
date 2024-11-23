@@ -18,7 +18,7 @@ While there are many columns in the dataset, we aim to primarily focus on the co
 
 ## Data Cleaning and Exploratory Data Analysis
 <iframe
-  src="assets/outage_duration_vs_year.html"
+  src="assets/outage_util_state_average.html"
   width="800"
   height="600"
   frameborder="0"

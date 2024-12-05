@@ -15,8 +15,10 @@ We are given a comprehensive dataset about the power outages that occured in the
 
 While there are many columns in the dataset, we aim to primarily focus on the columns that would align with our research interest regarding the question of how do socio-economic factors and historical reliability metrics influence the resilience of power systems in different regions, and can we predict areas with high risk of prolonged outages?
 
+We initially planned to investigate the correlation between the scio-econmic factors and the duration of the power outage, it was estimated that the region with weaker economies, or with a lower economical contribution by the utility sector may have experienced the longer power outage duration. However, we have investigated the columns related to the socio-economical factors such as the real GSP, the GSP contributed by the utility sector.
 
 ## Data Cleaning and Exploratory Data Analysis
+We will start the data analysis by investigating the trend of the number of outages has occured over years,
 <iframe
   src="assets/outage_util_state_average.html"
   width="800"

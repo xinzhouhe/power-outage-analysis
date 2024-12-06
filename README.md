@@ -53,15 +53,34 @@ As one of our last a few attempt on finding the relationship between the scio-ec
   frameborder="0"
 ></iframe>
 
-However, after observing the visualization, there was no sufficient evidence to back our assumption. Although it is shown that the highest pricing category does show the shortest outage, it could be the reason that there were too little utilities charging that unusually high price, and effectively making this category an outlier, which does not affect the overall pattern.
+However, after observing the visualization, there was no sufficient evidence to back our assumption. Although it is shown that the highest pricing category does have the shortest outage, it could be the reason that there were too little utilities charging that unusually high price, and effectively making this category an outlier, which does not affect the overall pattern.
+
+#### The Cause of Power Outages and Its Effects
+At this point, we have changed our initial proposal on targeting the scio-economical factors on the effects of the duration of the power outage. We have made two analysis on how the cause of power outages affect its duration and the loss the power demand.
+<iframe
+  src="assets/outage_duration_vs_cause.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+<iframe
+  src="assets/outage_loss_vs_cause.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+According to these two graphs,
 
 ## Framing a Prediction Problem
 After the series of analysis, we believe that the finding of the potential correlation between the frequency of the power outage of a particular month in a year and the duration of the power outage at the same time, through observing using the 2D and 3D heatmap, it worth the further studying and the construction of the prediction model. Therefore, we propose the prediction problem as predicting the duration of the power outage based on how frequent the outage outage have occured in the particular month.
 
-That has being said, at the testing stage, our prediction model would have the following features known, which are the month 
+That has being said, at the testing stage, our prediction model would have the following features known, which would be the month and the year of the occured power outage. In which the model will be predicting the duration of the power outage.
 
 ## Baseline Model
+Our model is a 
+
 ## Final Model
+In our final mode, we have incorporated additional features,
 
 ## Acknowledgments
 This project report authored by <a href='https://xinzhouhe.github.io/'>Daniel X. He</a> and <a href='https://www.linkedin.com/in/mboze/'>Michael D. Boze</a> as part of <a href='https://practicaldsc.org/'>EECS 398-003 Practical Data Science</a> portfolio homework by <a href='https://rampure.org/'>Professor Suraj Rampure</a> at the University of Michigan College of Engineering.

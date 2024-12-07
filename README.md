@@ -88,9 +88,31 @@ We have analyzed the trend over months within a year, but we have not found a sp
   height="600"
   frameborder="0"
 ></iframe>
-It appears that the 
+It appears that the frequency of the power outages is concentrated on the the later year, and 2010 with the highest frequency of the power outage. To see if there could be any correlation between the frequency of the power outage and its average duration over the specific period of time, we have created a similar heatmap for the average duration of the power outage for the months in a year.
+<iframe
+  src="assets/average_duration_heatmap.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+By the comparison of two heatmaps that we have created, it leads to the belief that the month of a year experienced a higher frequency, tend to have a lower average duration. Therefore, it is likely if there are more power outages happened in a month, the shorter of each one might be lasting.
 
 ## Framing a Prediction Problem
+### Conclusion From the Exploratory Data Analysis
+Through our observation from the exploratory data analysis, we initially investigated correlations between socio-economic factors and power outage durations. However, no strong or reliable patterns were identified between variables like the real GSP contributed by the utility industry, state utility sector income as a percentage of the total U.S. utility income, and residential electricity price against outage duration. Our assumptions regarding these socio-economic variables influencing outage durations could not be substantiated. 
+
+The focus then shifted to analyzing the causes of power outages and their impact. Clear correlations were observed:
+
+1. The cause of the power outage had a significant influence on its duration.
+2. The cause also affected the loss in power demand during outages.
+
+Additionally, trends in outage frequency across years and months indicated that:
+
+- Frequency surged in 2010 but showed overall fluctuations in later years.
+- Months with higher outage frequency tended to have shorter average durations.
+
+These insights led to the refinement of our prediction problem to focus on classifying outages as either long or short based on available features like `CUSTOMERS.AFFECTED` and `CAUSE.CATEGORY`.
+
 The prediction problem is framed as a binary classification task to determine whether a power outage will last 60 minutes or longer. Long outages are defined as outages lasting one hour or more, with the target variable `LONG_OUTAGE` set to 1 for long outages and 0 for short outages. The following aspects were considered:
 
 - **Features (X):**
@@ -187,7 +209,7 @@ The final model achieved the following performance metrics on the test dataset:
    - The final model outperformed the baseline in all key metrics, especially for the minority class.
    - The weighted averages highlight an overall balanced improvement.
 
-2. **Next Steps**:
+2. **Potential Future Improvement**:
    - Further explore advanced models (e.g., Random Forests, Gradient Boosting) for additional gains.
    - Investigate additional features or external datasets to improve predictive power.
    - Perform hyperparameter tuning to optimize the logistic regression model fu

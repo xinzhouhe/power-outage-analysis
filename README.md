@@ -69,18 +69,128 @@ At this point, we have changed our initial proposal on targeting the scio-econom
   height="600"
   frameborder="0"
 ></iframe>
-According to these two graphs,
+According to these two graphs, we believe that there is a correlation between the cause of the power outage and its duration, as well as the power demand loss cause by the power outage.
+
+#### Other misc. analysis
+Besides the above analysis and visualizations, we have also explored the dataset a little bit more, to gain a deeper understanding of the pattern. The first would the trend of the frequency of the power outages occured over years.
+<iframe
+  src="assets/annual_trend.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+It is shown like that there were way less frequent power outage happened pre-2010, but slowly increasing, and the frequency has surged on 2010. After 2010, we have noticed that overall pattern starts to decrease. Therefore, we have made a more detailed analysis into the year of 2016, and noticed that the latest outage occured in 2016 is in July. As such, we believe that the data for 2016 is incomplete and therefore could be the evidence to back the claim that the frequency of power outages after 2010 has been steadily decreasing, but instead may be decreased slightly and back increasing again.
+
+We have analyzed the trend over months within a year, but we have not found a specific pattern or correlation of which specific month of a year would likely to have more power outages. Therefore, we have combined all months and years into a new data frame, and created a heatmap as the visualization of the frequency of the power outages happened in each month of each year.
+<iframe
+  src="assets/outage_counts_by_mon_and_year.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+It appears that the 
 
 ## Framing a Prediction Problem
-After the series of analysis, we believe that the finding of the potential correlation between the frequency of the power outage of a particular month in a year and the duration of the power outage at the same time, through observing using the 2D and 3D heatmap, it worth the further studying and the construction of the prediction model. Therefore, we propose the prediction problem as predicting the duration of the power outage based on how frequent the outage outage have occured in the particular month.
+The prediction problem is framed as a binary classification task to determine whether a power outage will last 60 minutes or longer. Long outages are defined as outages lasting one hour or more, with the target variable `LONG_OUTAGE` set to 1 for long outages and 0 for short outages. The following aspects were considered:
 
-That has being said, at the testing stage, our prediction model would have the following features known, which would be the month and the year of the occured power outage. In which the model will be predicting the duration of the power outage.
+- **Features (X):**
+  - `CUSTOMERS.AFFECTED`
+  - `CAUSE.CATEGORY`
+- **Target (y):**
+  - `LONG_OUTAGE`
+
+The goal was to preprocess the features and train a model to accurately classify power outages based on the available data.
 
 ## Baseline Model
-Our model is a 
+#### **Model Development**
+The baseline model was developed using Python's `scikit-learn` library to predict outage-related classifications based on key features. Below is a summary of the steps involved in the development:
+
+1. **Data Preparation**:
+   - The dataset includes features such as `CUSTOMERS.AFFECTED`, `CAUSE.CATEGORY`, and `OUTAGE.DURATION`.
+   - Missing values were handled by filling with zeros for numerical features like `LONG.OUTAGE`.
+
+2. **Feature Selection**:
+   - The selected features for training included:
+     - Numerical: `CUSTOMERS.AFFECTED`, `OUTAGE.DURATION`.
+     - Categorical: `CAUSE.CATEGORY`.
+
+3. **Data Splitting**:
+   - The dataset was split into training and testing subsets with an 80-20 ratio to ensure unbiased evaluation.
+   - A random seed (`random_state=42`) was used to allow reproducibility.
+
+4. **Preprocessing**:
+   - A `ColumnTransformer` was used to preprocess the features:
+     - **Numerical features** were standardized using `StandardScaler`.
+     - **Categorical features** were encoded using `OneHotEncoder`.
+
+5. **Pipeline**:
+   - A `Pipeline` was built to streamline preprocessing and model fitting:
+     - Preprocessing steps were incorporated into the pipeline.
+     - Logistic regression (`LogisticRegression`) was used as the classification model for simplicity and interpretability.
+
+6. **Training**:
+   - The pipeline was fit on the training data using the selected features.
+
+#### **Performance Evaluation**
+The model was evaluated on the test dataset using the following metrics:
+
+- **Precision**: Indicates how many of the predicted positive results were correctly classified.
+- **Recall**: Measures the ability of the model to identify all positive instances.
+- **F1-Score**: Harmonic mean of precision and recall, providing a balance between the two.
+- **Accuracy**: Proportion of correctly classified instances over the total number of predictions.
+
+The classification report generated for the test data is as follows:
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.47      | 0.57   | 0.52     | 70      |
+| 1     | 0.87      | 0.78   | 0.82     | 237     |
+| **Overall** | **0.77** | **0.76** | **0.77** | **307** |
+
+- **Macro Average**: Precision (0.69), Recall (0.68), F1-Score (0.69).
+- **Weighted Average**: Precision (0.77), Recall (0.76), F1-Score (0.77).
+
+#### **Insights**
+1. The model achieved an overall accuracy of 77%, which is a reasonable performance for a baseline model.
+2. Class 1 (majority class) had significantly higher precision, recall, and F1-score, indicating the model performs better for this class.
+3. Class 0 (minority class) performance was weaker, highlighting class imbalance as a challenge for improvement.
+
+#### **Next Steps**
+1. **Address Class Imbalance**:
+   - Use techniques like oversampling (SMOTE), undersampling, or class weights to improve performance on minority classes.
+2. **Feature Engineering**:
+   - Explore additional features or transformations to enhance predictive power.
+3. **Model Selection**:
+   - Experiment with advanced models such as decision trees, random forests, or gradient boosting methods.
+4. **Hyperparameter Tuning**:
+   - Optimize the logistic regression model using techniques like grid search or random search.
 
 ## Final Model
-In our final mode, we have incorporated additional features,
+The final model achieved the following performance metrics on the test dataset:
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.64      | 0.70   | 0.67     | 70      |
+| 1     | 0.91      | 0.89   | 0.90     | 237     |
+| **Overall** | **0.84** | **0.84** | **0.85** | **307** |
+
+- **Macro Average**: Precision (0.78), Recall (0.79), F1-Score (0.78).
+- **Weighted Average**: Precision (0.85), Recall (0.84), F1-Score (0.85).
+
+#### **Final Model Insights**
+1. The overall accuracy improved to 84%, demonstrating significant performance gains over the baseline model.
+2. Class 0 (minority class) performance improved substantially, with better precision, recall, and F1-score.
+3. The preprocessing enhancements and handling of unknown categories contributed to the improved metrics.
+
+#### **Comparison and Next Steps**
+1. **Comparison**:
+   - The final model outperformed the baseline in all key metrics, especially for the minority class.
+   - The weighted averages highlight an overall balanced improvement.
+
+2. **Next Steps**:
+   - Further explore advanced models (e.g., Random Forests, Gradient Boosting) for additional gains.
+   - Investigate additional features or external datasets to improve predictive power.
+   - Perform hyperparameter tuning to optimize the logistic regression model fu
 
 ## Acknowledgments
 This project report authored by <a href='https://xinzhouhe.github.io/'>Daniel X. He</a> and <a href='https://www.linkedin.com/in/mboze/'>Michael D. Boze</a> as part of <a href='https://practicaldsc.org/'>EECS 398-003 Practical Data Science</a> portfolio homework by <a href='https://rampure.org/'>Professor Suraj Rampure</a> at the University of Michigan College of Engineering.

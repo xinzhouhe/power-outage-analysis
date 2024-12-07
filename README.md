@@ -1,9 +1,9 @@
 ---
-title: "Power Outage Analysis"
+title: "Analyzing and Predicting Lengthy Power Outages: Insights from Data and Model Development"
 layout: spec
 ---
 
-# Power Outage Analysis
+# Analyzing and Predicting Lengthy Power Outages: Insights from Data and Model Development
 ## Introduction
 We are given a comprehensive dataset about the power outages that occured in the United States from the year of 2000 and up until the year of 2016, the table below is the detailed description for some columns that we were investigating or haven investigated on, throughout this analysis study, each column represents a feature of the dataset.
 

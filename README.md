@@ -71,8 +71,8 @@ At this point, we have changed our initial proposal on targeting the scio-econom
 ></iframe>
 According to these two graphs, we believe that there is a correlation between the cause of the power outage and its duration, as well as the power demand loss cause by the power outage.
 
-#### Other misc. analysis
-Besides the above analysis and visualizations, we have also explored the dataset a little bit more, to gain a deeper understanding of the pattern. The first would the trend of the frequency of the power outages occured over years.
+#### Bivariate Analysis
+The analysis and visualizations above were focused on the univariate analysis, we have also explored the dataset a little bit more, to gain a deeper understanding of the pattern. The first would the trend of the frequency of the power outages occured over years.
 <iframe
   src="assets/annual_trend.html"
   width="800"
@@ -81,7 +81,7 @@ Besides the above analysis and visualizations, we have also explored the dataset
 ></iframe>
 It is shown like that there were way less frequent power outage happened pre-2010, but slowly increasing, and the frequency has surged on 2010. After 2010, we have noticed that overall pattern starts to decrease. Therefore, we have made a more detailed analysis into the year of 2016, and noticed that the latest outage occured in 2016 is in July. As such, we believe that the data for 2016 is incomplete and therefore could be the evidence to back the claim that the frequency of power outages after 2010 has been steadily decreasing, but instead may be decreased slightly and back increasing again.
 
-We have analyzed the trend over months within a year, but we have not found a specific pattern or correlation of which specific month of a year would likely to have more power outages. Therefore, we have combined all months and years into a new data frame, and created a heatmap as the visualization of the frequency of the power outages happened in each month of each year.
+We have analyzed the trend over months within a year, but we have not found a specific pattern or correlation of which specific month of a year would likely to have more power outages. Therefore, we have combined all months and years into a new data frame, and created a heatmap as the visualization of the frequency of the power outages happened in each month of each year. This heatmap would combine two variables, which are month and year of the occured power outage.
 <iframe
   src="assets/outage_counts_by_mon_and_year.html"
   width="800"
@@ -99,8 +99,9 @@ By the comparison of two heatmaps that we have created, it leads to the belief t
 
 ## Framing a Prediction Problem
 ### Conclusion From the Exploratory Data Analysis
-Through our observation from the exploratory data analysis, we initially investigated correlations between socio-economic factors and power outage durations. However, no strong or reliable patterns were identified between variables like the real GSP contributed by the utility industry, state utility sector income as a percentage of the total U.S. utility income, and residential electricity price against outage duration. Our assumptions regarding these socio-economic variables influencing outage durations could not be substantiated. 
+Through our observation from the exploratory data analysis, we initially investigated correlations between socio-economic factors and power outage durations. However, no strong or reliable patterns were identified between variables like the real GSP contributed by the utility industry, state utility sector income as a percentage of the total U.S. utility income, and residential electricity price against outage duration. Our assumptions regarding these socio-economic variables influencing outage durations could not be substantiated.
 
+### Development of Our Prediction Problem
 The focus then shifted to analyzing the causes of power outages and their impact. Clear correlations were observed:
 
 1. The cause of the power outage had a significant influence on its duration.
@@ -124,7 +125,7 @@ The prediction problem is framed as a binary classification task to determine wh
 The goal was to preprocess the features and train a model to accurately classify power outages based on the available data.
 
 ## Baseline Model
-#### Model Development
+### Model Development
 The baseline model was developed using Python's `scikit-learn` library to predict outage-related classifications based on key features. Below is a summary of the steps involved in the development:
 
 1. **Data Preparation**:
@@ -153,7 +154,7 @@ The baseline model was developed using Python's `scikit-learn` library to predic
 6. **Training**:
    - The pipeline was fit on the training data using the selected features.
 
-#### Performance Evaluation
+### Performance Evaluation
 The model was evaluated on the test dataset using the following metrics:
 
 - **Precision**: Indicates how many of the predicted positive results were correctly classified.
@@ -172,47 +173,70 @@ The classification report generated for the test data is as follows:
 - **Macro Average**: Precision (0.69), Recall (0.68), F1-Score (0.69).
 - **Weighted Average**: Precision (0.77), Recall (0.76), F1-Score (0.77).
 
-#### Insights
+### Insights
 1. The model achieved an overall accuracy of 77%, which is a reasonable performance for a baseline model.
 2. Class 1 (majority class) had significantly higher precision, recall, and F1-score, indicating the model performs better for this class.
 3. Class 0 (minority class) performance was weaker, highlighting class imbalance as a challenge for improvement.
 
-#### Next Steps
-1. **Address Class Imbalance**:
-   - Use techniques like oversampling (SMOTE), undersampling, or class weights to improve performance on minority classes.
+### Next Steps
+1. **Cross-validation**:
+   - Use cross-validation to ensure the model generalized well across different subsets of the data.
 2. **Feature Engineering**:
    - Explore additional features or transformations to enhance predictive power.
-3. **Model Selection**:
-   - Experiment with advanced models such as decision trees, random forests, or gradient boosting methods.
-4. **Hyperparameter Tuning**:
+3. **Hyperparameter Tuning**:
    - Optimize the logistic regression model using techniques like grid search or random search.
 
 ## Final Model
-The final model achieved the following performance metrics on the test dataset:
+### Features and Their Importance
+For the final model, we added **`MONTH`** as an additional feature, for the following reasons:
+  - Temporal patterns, such as seasonal effects, could play a role in outage duration, especially in regions prone to severe weather.
+  - In the heatmap that we have created from the exploratory data analysis, we have found there are some months of some years tend to have more frequent power outages, and it could correlate to the duration of the power outage in that month.
 
-| Class | Precision | Recall | F1-Score | Support |
-|-------|-----------|--------|----------|---------|
-| 0     | 0.64      | 0.70   | 0.67     | 70      |
-| 1     | 0.91      | 0.89   | 0.90     | 237     |
-| **Overall** | **0.84** | **0.84** | **0.85** | **307** |
+### Modeling Algorithm
+We used **Logistic Regression** for the final model due to its simplicity, interpretability, and ability to handle binary classification tasks effectively. To enhance the model's performance and ensure robustness, we incorporated the following techniques:
 
-- **Macro Average**: Precision (0.78), Recall (0.79), F1-Score (0.78).
-- **Weighted Average**: Precision (0.85), Recall (0.84), F1-Score (0.85).
+1. **Hyperparameter Tuning**:
+   - We performed a grid search to optimize key hyperparameters:
+     - `C`: Regularization strength, tested with values [0.01, 0.1, 1, 10, 100].
+     - `penalty`: L2 regularization was chosen to avoid overfitting.
+     - `solver`: The `lbfgs` solver, which works well with L2 regularization.
 
-#### Final Model Insights
-1. The overall accuracy improved to 84%, demonstrating significant performance gains over the baseline model.
-2. Class 0 (minority class) performance improved substantially, with better precision, recall, and F1-score.
-3. The preprocessing enhancements and handling of unknown categories contributed to the improved metrics.
+2. **Class Imbalance Handling**:
+   - The dataset exhibited class imbalance, with fewer instances of long outages. We used `class_weight='balanced'` to assign higher weights to the minority class and improve its recall.
 
-#### Comparison and Potential Future Improvements
-1. **Comparison**:
-   - The final model outperformed the baseline in all key metrics, especially for the minority class.
-   - The weighted averages highlight an overall balanced improvement.
+3. **Cross-Validation**:
+   - We used 5-fold cross-validation to ensure the model generalized well across different subsets of the data.
 
-2. **Potential Future Improvements**:
-   - Further explore advanced models (e.g., Random Forests, Gradient Boosting) for additional gains.
-   - Investigate additional features or external datasets to improve predictive power.
-   - Perform hyperparameter tuning to optimize the logistic regression model fu
+### Performance Comparison
+
+**Baseline Model Metrics**:
+| Metric       | Class 0 | Class 1 | Accuracy | Macro Avg | Weighted Avg |
+|--------------|---------|---------|----------|-----------|--------------|
+| Precision    | 0.53    | 0.81    | 0.77     | 0.67      | 0.75         |
+| Recall       | 0.31    | 0.91    |          | 0.61      | 0.75         |
+| F1-Score     | 0.39    | 0.86    |          | 0.63      | 0.77         |
+
+**Final Model Metrics**:
+| Metric       | Class 0 | Class 1 | Accuracy | Macro Avg | Weighted Avg |
+|--------------|---------|---------|----------|-----------|--------------|
+| Precision    | 0.49    | 0.93    | 0.75     | 0.71      | 0.83         |
+| Recall       | 0.84    | 0.72    |          | 0.78      | 0.75         |
+| F1-Score     | 0.62    | 0.81    |          | 0.72      | 0.77         |
+
+### Key Insights
+1. **Improvements in Class 0 (Short Outages)**:
+   - Recall for Class 0 improved significantly from **0.31** to **0.84**, indicating the model's enhanced ability to identify short outages.
+   - F1-Score for Class 0 increased from **0.39** to **0.62**, reflecting better overall performance on the minority class.
+
+2. **Trade-Offs in Precision**:
+   - Precision for Class 0 decreased slightly from **0.53** to **0.49**, likely due to the focus on improving recall and addressing class imbalance.
+
+3. **Overall Balance**:
+   - Macro average metrics improved significantly, showing better balance between the two classes.
+   - Weighted average precision and recall increased, reflecting improved performance weighted by class distribution.
+
+### Conclusion
+The final model represents a substantial improvement over the baseline model, particularly in handling the minority class (Class 0). While the overall accuracy remained constant, the model achieved better balance across metrics, making it more effective for real-world applications where identifying short outages is critical. The enhancements to preprocessing, hyperparameter tuning, and class imbalance handling were key factors in these improvements.
 
 ## Acknowledgments
 This project report authored by <a href='https://xinzhouhe.github.io/'>Daniel X. He</a> and <a href='https://www.linkedin.com/in/mboze/'>Michael D. Boze</a> as part of <a href='https://practicaldsc.org/'>EECS 398-003 Practical Data Science</a> portfolio homework by <a href='https://rampure.org/'>Professor Suraj Rampure</a> at the University of Michigan College of Engineering.

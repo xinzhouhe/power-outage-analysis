@@ -210,6 +210,7 @@ We used **Logistic Regression** for the final model due to its simplicity, inter
 ### Performance Comparison
 
 **Baseline Model Metrics**:
+
 | Metric       | Class 0 | Class 1 | Accuracy | Macro Avg | Weighted Avg |
 |--------------|---------|---------|----------|-----------|--------------|
 | Precision    | 0.53    | 0.81    | 0.77     | 0.67      | 0.75         |
@@ -217,6 +218,7 @@ We used **Logistic Regression** for the final model due to its simplicity, inter
 | F1-Score     | 0.39    | 0.86    |          | 0.63      | 0.77         |
 
 **Final Model Metrics**:
+
 | Metric       | Class 0 | Class 1 | Accuracy | Macro Avg | Weighted Avg |
 |--------------|---------|---------|----------|-----------|--------------|
 | Precision    | 0.49    | 0.93    | 0.75     | 0.71      | 0.83         |

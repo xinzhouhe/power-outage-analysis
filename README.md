@@ -124,7 +124,7 @@ The prediction problem is framed as a binary classification task to determine wh
 The goal was to preprocess the features and train a model to accurately classify power outages based on the available data.
 
 ## Baseline Model
-#### **Model Development**
+#### Model Development
 The baseline model was developed using Python's `scikit-learn` library to predict outage-related classifications based on key features. Below is a summary of the steps involved in the development:
 
 1. **Data Preparation**:
@@ -153,7 +153,7 @@ The baseline model was developed using Python's `scikit-learn` library to predic
 6. **Training**:
    - The pipeline was fit on the training data using the selected features.
 
-#### **Performance Evaluation**
+#### Performance Evaluation
 The model was evaluated on the test dataset using the following metrics:
 
 - **Precision**: Indicates how many of the predicted positive results were correctly classified.
@@ -172,12 +172,12 @@ The classification report generated for the test data is as follows:
 - **Macro Average**: Precision (0.69), Recall (0.68), F1-Score (0.69).
 - **Weighted Average**: Precision (0.77), Recall (0.76), F1-Score (0.77).
 
-#### **Insights**
+#### Insights
 1. The model achieved an overall accuracy of 77%, which is a reasonable performance for a baseline model.
 2. Class 1 (majority class) had significantly higher precision, recall, and F1-score, indicating the model performs better for this class.
 3. Class 0 (minority class) performance was weaker, highlighting class imbalance as a challenge for improvement.
 
-#### **Next Steps**
+#### Next Steps
 1. **Address Class Imbalance**:
    - Use techniques like oversampling (SMOTE), undersampling, or class weights to improve performance on minority classes.
 2. **Feature Engineering**:
@@ -199,12 +199,12 @@ The final model achieved the following performance metrics on the test dataset:
 - **Macro Average**: Precision (0.78), Recall (0.79), F1-Score (0.78).
 - **Weighted Average**: Precision (0.85), Recall (0.84), F1-Score (0.85).
 
-#### **Final Model Insights**
+#### Final Model Insights
 1. The overall accuracy improved to 84%, demonstrating significant performance gains over the baseline model.
 2. Class 0 (minority class) performance improved substantially, with better precision, recall, and F1-score.
 3. The preprocessing enhancements and handling of unknown categories contributed to the improved metrics.
 
-#### **Comparison and Potential Future Improvements**
+#### Comparison and Potential Future Improvements
 1. **Comparison**:
    - The final model outperformed the baseline in all key metrics, especially for the minority class.
    - The weighted averages highlight an overall balanced improvement.

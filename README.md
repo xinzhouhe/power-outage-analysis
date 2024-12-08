@@ -210,14 +210,6 @@ We replaced Logistic Regression with a **Decision Tree Classifier** to explore n
    - A pipeline was constructed to combine preprocessing steps and the Decision Tree Classifier, ensuring streamlined model training and evaluation.
 
 ### Performance Comparison
-**Baseline Model Metrics (Logistic Regression)**:
-
-| Metric       | Class 0 | Class 1 | Accuracy | Macro Avg | Weighted Avg |
-|--------------|---------|---------|----------|-----------|--------------|
-| Precision    | 0.53    | 0.81    |          | 0.67      | 0.75         |
-| Recall       | 0.31    | 0.91    |          | 0.61      | 0.75         |
-| F1-Score     | 0.39    | 0.86    | 0.77     | 0.63      | 0.77         |
-
 **Final Model Metrics (Decision Tree Classifier)**:
 
 | Metric       | Class 0 | Class 1 | Accuracy | Macro Avg | Weighted Avg |

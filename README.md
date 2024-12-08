@@ -193,23 +193,24 @@ For the final model, we added **`MONTH`** as an additional feature, for the foll
   - In the heatmap that we have created from the exploratory data analysis, we have found there are some months of some years tend to have more frequent power outages, and it could correlate to the duration of the power outage in that month.
 
 ### Modeling Algorithm
-We used **Logistic Regression** for the final model due to its simplicity, interpretability, and ability to handle binary classification tasks effectively. To enhance the model's performance and ensure robustness, we incorporated the following techniques:
+We replaced Logistic Regression with a **Decision Tree Classifier** to explore non-linear relationships between features and the target variable. Decision trees can capture complex patterns in the data, making them a suitable choice for this task. To optimize the model, we used the following techniques:
 
 1. **Hyperparameter Tuning**:
-   - We performed a grid search to optimize key hyperparameters:
-     - `C`: Regularization strength, tested with values [0.01, 0.1, 1, 10, 100].
-     - `penalty`: L2 regularization was chosen to avoid overfitting.
-     - `solver`: The `lbfgs` solver, which works well with L2 regularization.
+   - The following hyperparameters were tuned using GridSearchCV:
+     - `max_depth`: Controls the maximum depth of the tree. Values tested: [5, 10, 20].
+     - `min_samples_split`: Specifies the minimum number of samples required to split an internal node. Values tested: [2, 5, 10].
+   - The best parameters were:
+     - `max_depth`: 5
+     - `min_samples_split`: 2
 
-2. **Class Imbalance Handling**:
-   - The dataset exhibited class imbalance, with fewer instances of long outages. We used `class_weight='balanced'` to assign higher weights to the minority class and improve its recall.
+2. **Cross-Validation**:
+   - Used 5-fold cross-validation to ensure the model generalized well across different subsets of the data.
 
-3. **Cross-Validation**:
-   - We used 5-fold cross-validation to ensure the model generalized well across different subsets of the data.
+3. **Pipeline Integration**:
+   - A pipeline was constructed to combine preprocessing steps and the Decision Tree Classifier, ensuring streamlined model training and evaluation.
 
 ### Performance Comparison
-
-**Baseline Model Metrics**:
+**Baseline Model Metrics (Logistic Regression)**:
 
 | Metric       | Class 0 | Class 1 | Accuracy | Macro Avg | Weighted Avg |
 |--------------|---------|---------|----------|-----------|--------------|
@@ -217,28 +218,29 @@ We used **Logistic Regression** for the final model due to its simplicity, inter
 | Recall       | 0.31    | 0.91    |          | 0.61      | 0.75         |
 | F1-Score     | 0.39    | 0.86    |          | 0.63      | 0.77         |
 
-**Final Model Metrics**:
+**Final Model Metrics (Decision Tree Classifier)**:
 
 | Metric       | Class 0 | Class 1 | Accuracy | Macro Avg | Weighted Avg |
 |--------------|---------|---------|----------|-----------|--------------|
-| Precision    | 0.49    | 0.93    | 0.75     | 0.71      | 0.83         |
-| Recall       | 0.84    | 0.72    |          | 0.78      | 0.75         |
-| F1-Score     | 0.62    | 0.81    |          | 0.72      | 0.77         |
+| Precision    | 0.66    | 0.89    | 0.83     | 0.77      | 0.83         |
+| Recall       | 0.64    | 0.89    |          | 0.77      | 0.83         |
+| F1-Score     | 0.65    | 0.89    |          | 0.77      | 0.83         |
 
 ### Key Insights
-1. **Improvements in Class 0 (Short Outages)**:
-   - Recall for Class 0 improved significantly from **0.31** to **0.84**, indicating the model's enhanced ability to identify short outages.
-   - F1-Score for Class 0 increased from **0.39** to **0.62**, reflecting better overall performance on the minority class.
+1. **Improved Balance Across Classes**:
+   - The final model achieved balanced precision, recall, and F1-score for both classes, indicating good generalization.
 
-2. **Trade-Offs in Precision**:
-   - Precision for Class 0 decreased slightly from **0.53** to **0.49**, likely due to the focus on improving recall and addressing class imbalance.
+2. **Class 0 (Short Outages)**:
+   - Precision improved to **0.66**, and recall reached **0.64**, resulting in a well-rounded F1-score of **0.65**.
 
-3. **Overall Balance**:
-   - Macro average metrics improved significantly, showing better balance between the two classes.
-   - Weighted average precision and recall increased, reflecting improved performance weighted by class distribution.
+3. **Class 1 (Long Outages)**:
+   - Maintained strong precision and recall at **0.89**, highlighting the model's ability to correctly identify long outages.
 
-### Conclusion
-The final model represents a substantial improvement over the baseline model, particularly in handling the minority class (Class 0). While the overall accuracy remained constant, the model achieved better balance across metrics, making it more effective for real-world applications where identifying short outages is critical. The enhancements to preprocessing, hyperparameter tuning, and class imbalance handling were key factors in these improvements.
+4. **Overall Metrics**:
+   - Accuracy improved to **83%**, with macro and weighted averages also reflecting balanced performance.
+
+#### **Conclusion**
+The Decision Tree Classifier provided a significant improvement in handling the minority class (Class 0) while maintaining strong performance for the majority class (Class 1). The model's ability to capture non-linear relationships contributed to its better overall performance compared to the baseline Logistic Regression model.
 
 ## Acknowledgments
 This project report authored by <a href='https://xinzhouhe.github.io/'>Daniel X. He</a> and <a href='https://www.linkedin.com/in/mboze/'>Michael D. Boze</a> as part of <a href='https://practicaldsc.org/'>EECS 398-003 Practical Data Science</a> portfolio homework by <a href='https://rampure.org/'>Professor Suraj Rampure</a> at the University of Michigan College of Engineering.

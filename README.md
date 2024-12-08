@@ -204,12 +204,12 @@ The final model achieved the following performance metrics on the test dataset:
 2. Class 0 (minority class) performance improved substantially, with better precision, recall, and F1-score.
 3. The preprocessing enhancements and handling of unknown categories contributed to the improved metrics.
 
-#### **Comparison and Next Steps**
+#### **Comparison and Potential Future Improvements**
 1. **Comparison**:
    - The final model outperformed the baseline in all key metrics, especially for the minority class.
    - The weighted averages highlight an overall balanced improvement.
 
-2. **Potential Future Improvement**:
+2. **Potential Future Improvements**:
    - Further explore advanced models (e.g., Random Forests, Gradient Boosting) for additional gains.
    - Investigate additional features or external datasets to improve predictive power.
    - Perform hyperparameter tuning to optimize the logistic regression model fu

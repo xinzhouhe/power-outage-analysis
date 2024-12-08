@@ -220,19 +220,19 @@ We replaced Logistic Regression with a **Decision Tree Classifier** to explore n
 
 ### Key Insights
 1. **Improved Balance Across Classes**:
-   - The final model achieved balanced precision, recall, and F1-score for both classes, indicating good generalization.
+  - The final model achieved balanced precision, recall, and F1-score for both classes, indicating good generalization.
 
 2. **Class 0 (Short Outages)**:
-   - Precision improved to **0.66**, and recall reached **0.64**, resulting in a well-rounded F1-score of **0.65**.
+  - Precision improved to **0.66**, and recall reached **0.64**, resulting in a well-rounded F1-score of **0.65**.
 
 3. **Class 1 (Long Outages)**:
-   - Maintained strong precision and recall at **0.89**, highlighting the model's ability to correctly identify long outages.
+  - Maintained strong precision and recall at **0.89**, highlighting the model's ability to correctly identify long outages.
 
 4. **Overall Metrics**:
-   - Accuracy improved to **83%**, with macro and weighted averages also reflecting balanced performance.
+  - Accuracy improved to **83%**, with macro and weighted averages also reflecting balanced performance.
 
 #### **Conclusion**
-The Decision Tree Classifier provided a significant improvement in handling the minority class (Class 0) while maintaining strong performance for the majority class (Class 1). The model's ability to capture non-linear relationships contributed to its better overall performance compared to the baseline Logistic Regression model.
+After we added the additional feature of the month and replaced our model to the Decision Tree Classifier, we have seen a significant improvement in handling the minority class (Class 0) while maintaining strong performance for the majority class (Class 1). The model's ability to capture non-linear relationships contributed to its better overall performance compared to the baseline Logistic Regression model.
 
 ## Acknowledgments
 This project report authored by <a href='https://xinzhouhe.github.io/'>Daniel X. He</a> and <a href='https://www.linkedin.com/in/mboze/'>Michael D. Boze</a> as part of <a href='https://practicaldsc.org/'>EECS 398-003 Practical Data Science</a> portfolio homework by <a href='https://rampure.org/'>Professor Suraj Rampure</a> at the University of Michigan College of Engineering.
